@@ -4,6 +4,8 @@ const readline = require('readline');
 async function process() {
   let depth = 0;
   let horizontal = 0;
+  let aim = 0;
+
   dataStream = fs.createReadStream('../steering-data.txt');
   rl = readline.createInterface({
     input: dataStream,
@@ -15,13 +17,14 @@ async function process() {
 
     switch (splitted[0]) {
       case 'up':
-        depth -= parseInt(splitted[1]);
+        aim -= parseInt(splitted[1]);
         break;
       case 'down':
-        depth += parseInt(splitted[1]);
+        aim += parseInt(splitted[1]);
         break;
       case 'forward':
         horizontal += parseInt(splitted[1]);
+        depth += aim * parseInt(splitted[1]);
         break;
     }
   }
@@ -29,6 +32,7 @@ async function process() {
   return {
     depth: depth,
     horizontal: horizontal,
+    aim: aim,
     multi: depth * horizontal
   }
 }
