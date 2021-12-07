@@ -2,7 +2,7 @@ const fs = require('fs');
 const readline = require('readline');
 
 async function process() {
-        const fileStream = fs.createReadStream('../data.txt');
+        const fileStream = fs.createReadStream('../sonar-readings-data.txt');
 	let i = 0;
         let counter = 0;
 	let prev;
